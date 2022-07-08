@@ -33,6 +33,7 @@ public class Main {
             System.out.println("|7. Reset slang words goc.     |");
             System.out.println("|8. Random 1 slang word.       |");
             System.out.println("|9. Do vui slang word.         |");
+            System.out.println("|10. Do vui definition.        |");
             System.out.println("|0. Thoat chuong trinh.        |");
             System.out.println("================================");
             System.out.print("Moi ban chon chuc nang: ");
@@ -121,6 +122,9 @@ public class Main {
                     break;
                 case 9:
                     dictionary.quizSlangWord();
+                    break;
+                case 10:
+                    dictionary.quizDefinition();
                     break;
                 case 0:
                     System.out.println("Ban chon chuc nang thoat! Tam biet!");

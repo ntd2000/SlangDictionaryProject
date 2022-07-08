@@ -181,7 +181,7 @@ public class SlangDictionary {
             listDapAn.add(randomDefinition());
         }
         Collections.shuffle(listDapAn);
-        System.out.println("Difinition cua " + randomSlang + " la gi: (Co hoi chi co 1 lan)");
+        System.out.println("Difinition cua " + randomSlang + " la gi?(Co hoi chi co 1 lan)");
         for (int i = 0; i < listDapAn.size(); i++) {
             System.out.println((i + 1) + ". " + listDapAn.get(i));
         }
@@ -213,6 +213,62 @@ public class SlangDictionary {
             };
         } while (check);
         if (dapAnChon.equals(dictionary.get(randomSlang))) {
+            System.out.println("Chuc mung! Ban da chon dung!");
+        } else {
+            System.out.println("Rat tiec! Ban da chon sai!");
+        }
+    }
+    
+    public void quizDefinition() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        if (dictionary.isEmpty()) {
+            this.docFile();
+        }
+        String randomDefi = randomDefinition();
+        ArrayList<String> listSlang = new ArrayList<>();
+        for(String slang : dictionary.keySet()){
+            if(dictionary.get(slang).equals(randomDefi)){
+                listSlang.add(slang);
+                break;
+            }
+        }
+        for (int i = 0; i < 3; i++) {
+            listSlang.add(randomSlangWord());
+        }
+        Collections.shuffle(listSlang);
+        System.out.println(randomDefi + " la cua slang word nao?(Co hoi chi co 1 lan)");
+        for (int i = 0; i < listSlang.size(); i++) {
+            System.out.println((i + 1) + ". " + listSlang.get(i));
+        }
+        boolean check = true;
+        String dapAnChon = null;
+        do {
+            System.out.print("Moi ban chon(1 - 4): ");
+            int chon = Integer.parseInt(scanner.nextLine());
+            switch (chon) {
+                case 1:
+                    dapAnChon = listSlang.get(chon - 1);
+                    check = false;
+                    break;
+                case 2:
+                    dapAnChon = listSlang.get(chon - 1);
+                    check = false;
+                    break;
+                case 3:
+                    dapAnChon = listSlang.get(chon - 1);
+                    check = false;
+                    break;
+                case 4:
+                    dapAnChon = listSlang.get(chon - 1);
+                    check = false;
+                    break;
+                default:
+                    System.out.println("Ban chi co the chon tu 1 - 4");
+                    break;
+            };
+        } while (check);
+        
+        if (randomDefi.equals(dictionary.get(dapAnChon))) {
             System.out.println("Chuc mung! Ban da chon dung!");
         } else {
             System.out.println("Rat tiec! Ban da chon sai!");
