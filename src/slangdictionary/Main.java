@@ -24,17 +24,18 @@ public class Main {
         HashMap<String, String> history = new HashMap<>();
         do {
             System.out.println("============= MENU =============");
-            System.out.println("|1. Tìm kiếm theo slang word.  |");
-            System.out.println("|2. Tìm kiếm theo definition.  |");
-            System.out.println("|3. Hiển thị history.          |");
-            System.out.println("|4. Thêm một slang word mới.   |");
-            System.out.println("|0. Thoát chương trình.        |");
+            System.out.println("|1. Tim kiem theo slang word.  |");
+            System.out.println("|2. Tim kiem theo definition.  |");
+            System.out.println("|3. Hien thi history.          |");
+            System.out.println("|4. Them mot slang word moi.   |");
+            System.out.println("|5. Chinh sua mọt slang word.  |");
+            System.out.println("|0. Thoat  chuong trinh.        |");
             System.out.println("================================");
-            System.out.print("Mời bạn chọn chức năng: ");
+            System.out.print("Moi ban chon chuc nang: ");
             chon = Integer.parseInt(scanner.nextLine());
             switch (chon) {
                 case 1:
-                    System.out.print("Mời bạn nhập slang word: ");
+                    System.out.print("Moi ban nhap slang word: ");
                     keyword = scanner.nextLine();
                     slangWords = dictionary.timTheoSlangWord(keyword);
                     for (String slang : slangWords.keySet()) {
@@ -43,7 +44,7 @@ public class Main {
                     }
                     break;
                 case 2:
-                    System.out.print("Mời bạn nhập definition: ");
+                    System.out.print("Moi ban nhap definition: ");
                     keyword = scanner.nextLine();
                     slangWords = dictionary.timTheoDefinition(keyword);
                     for (String slang : slangWords.keySet()) {
@@ -58,20 +59,31 @@ public class Main {
                     }
                     break;
                 case 4:
-                    System.out.println("Mời bạn nhập slang word mới: ");
+                    System.out.println("Moi ban nhap slang word moi: ");
                     System.out.print("Slang: ");
                     String slang = scanner.nextLine();
                     System.out.print("Definition: ");
                     String definition = scanner.nextLine();
                     int check = dictionary.themSlangWord(slang, definition);
                     if (check == 1) {
-                        System.out.println("Thêm thành công!");
+                        System.out.println("Them thanh cong!");
                     } else {
-                        System.out.println("Thêm thất bại!");
+                        System.out.println("Them that bai!");
+                    }
+                    break;
+                case 5:
+                    System.out.println("Moi ban nhap slang word can chinh sua: ");
+                    String editSlang = scanner.nextLine();
+                    System.out.print("Definition moi cua slang word: ");
+                    String editDefinition = scanner.nextLine();
+                    if (dictionary.suaSlangWord(editSlang, editDefinition) == 1) {
+                        System.out.println("Sua thanh cong!");
+                    } else {
+                        System.out.println("Sua that bai!");
                     }
                     break;
                 case 0:
-                    System.out.println("Bạn chọn chức năng thoát! Tạm biệt!");
+                    System.out.println("Ban chon chuc nang thoat! Tam biet!");
                     System.exit(0); // thoát chương trình
                     break;
             }

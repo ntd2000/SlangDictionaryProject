@@ -83,4 +83,21 @@ public class SlangDictionary {
         }
         return 1;
     }
+
+    public int suaSlangWord(String slang, String definition) throws IOException {
+        if (dictionary.isEmpty()) {
+            this.docFile();
+        }
+        try {
+            BufferedWriter buffer = new BufferedWriter(new FileWriter("slang.txt", true));
+            dictionary.replace(slang, definition);
+            for (String key : dictionary.keySet()) {
+                buffer.write("\r\n" + key + "`" + dictionary.get(key));
+            }
+            buffer.close();
+        } catch (IOException ex) {
+            return -1;
+        }
+        return 1;
+    }
 }
