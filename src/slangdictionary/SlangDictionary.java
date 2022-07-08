@@ -11,7 +11,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  *
@@ -137,5 +139,18 @@ public class SlangDictionary {
         } catch (IOException ex) {
             return -1;
         }
+    }
+    
+    public void randomSlangWord() throws IOException{
+        if (dictionary.isEmpty()) {
+            this.docFile();
+        }
+        Random generator = new Random();
+        ArrayList<String> list = new ArrayList<>();
+        for(String slang : dictionary.keySet()){
+            list.add(slang);
+        }
+        int index = generator.nextInt(dictionary.size());
+        System.out.println(list.get(index) + " = " +dictionary.get(list.get(index)));
     }
 }
