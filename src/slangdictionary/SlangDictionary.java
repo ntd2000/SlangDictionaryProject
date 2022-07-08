@@ -89,12 +89,30 @@ public class SlangDictionary {
             this.docFile();
         }
         try {
-            BufferedWriter buffer = new BufferedWriter(new FileWriter("slang.txt", true));
+            BufferedWriter buffer = new BufferedWriter(new FileWriter("slang.txt"));
             dictionary.replace(slang, definition);
             for (String key : dictionary.keySet()) {
-                buffer.write("\r\n" + key + "`" + dictionary.get(key));
+                buffer.write(key + "`" + dictionary.get(key) + "\r\n");
             }
             buffer.close();
+        } catch (IOException ex) {
+            return -1;
+        }
+        return 1;
+    }
+
+    public int xoaSlangWord(String deleteSlang) throws IOException {
+        if (dictionary.isEmpty()) {
+            this.docFile();
+        }
+        try {
+            BufferedWriter buffer = new BufferedWriter(new FileWriter("slang.txt"));
+            for (String slang : dictionary.keySet()) {
+                if (slang.equals(deleteSlang))continue;
+                buffer.write(slang + "`" + dictionary.get(slang) + "\r\n" );
+            }
+            buffer.close();
+            dictionary.remove(deleteSlang);
         } catch (IOException ex) {
             return -1;
         }

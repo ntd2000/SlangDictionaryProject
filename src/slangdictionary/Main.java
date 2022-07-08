@@ -29,7 +29,8 @@ public class Main {
             System.out.println("|3. Hien thi history.          |");
             System.out.println("|4. Them mot slang word moi.   |");
             System.out.println("|5. Chinh sua mọt slang word.  |");
-            System.out.println("|0. Thoat  chuong trinh.        |");
+            System.out.println("|6. Xoa mot slang word.        |");
+            System.out.println("|0. Thoat chuong trinh.        |");
             System.out.println("================================");
             System.out.print("Moi ban chon chuc nang: ");
             chon = Integer.parseInt(scanner.nextLine());
@@ -72,7 +73,7 @@ public class Main {
                     }
                     break;
                 case 5:
-                    System.out.println("Moi ban nhap slang word can chinh sua: ");
+                    System.out.print("Moi ban nhap slang word can chinh sua: ");
                     String editSlang = scanner.nextLine();
                     System.out.print("Definition moi cua slang word: ");
                     String editDefinition = scanner.nextLine();
@@ -82,9 +83,35 @@ public class Main {
                         System.out.println("Sua that bai!");
                     }
                     break;
+                case 6:
+                    System.out.print("Moi ban nhap slang word can xoa: ");
+                    String deleteSlang = scanner.nextLine();
+                    System.out.println("Ban co chac la muon xoa hay khong? ");
+                    do {
+                        System.out.println("1. Xoa!");
+                        System.out.println("0. Khong xoa!");
+                        System.out.print("Chon (1 hoac 0): ");
+                        chon = Integer.parseInt(scanner.nextLine());
+                        if (chon == 1) {
+                            if (dictionary.xoaSlangWord(deleteSlang) == 1) {
+                                System.out.println("Xoa thanh cong!");
+                            } else {
+                                System.out.println("Xoa that bai!");
+                            }
+                            break;
+                        } else if(chon == 0) {
+                            break;
+                        }else{
+                            System.out.print("Ban chi co the chon 1 hoac 0? ");
+                        }
+                    } while (true);
+                    break;
                 case 0:
                     System.out.println("Ban chon chuc nang thoat! Tam biet!");
                     System.exit(0); // thoát chương trình
+                    break;
+                default:
+                    System.out.println("Moi ban chon theo menu!");
                     break;
             }
         } while (true);
