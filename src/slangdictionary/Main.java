@@ -27,6 +27,7 @@ public class Main {
             System.out.println("|1. Tìm kiếm theo slang word.  |");
             System.out.println("|2. Tìm kiếm theo definition.  |");
             System.out.println("|3. Hiển thị history.          |");
+            System.out.println("|4. Thêm một slang word mới.   |");
             System.out.println("|0. Thoát chương trình.        |");
             System.out.println("================================");
             System.out.print("Mời bạn chọn chức năng: ");
@@ -55,7 +56,20 @@ public class Main {
                     for (String slang : history.keySet()) {
                         System.out.println(slang + " = " + history.get(slang));
                     }
-                    break;                
+                    break;
+                case 4:
+                    System.out.println("Mời bạn nhập slang word mới: ");
+                    System.out.print("Slang: ");
+                    String slang = scanner.nextLine();
+                    System.out.print("Definition: ");
+                    String definition = scanner.nextLine();
+                    int check = dictionary.themSlangWord(slang, definition);
+                    if (check == 1) {
+                        System.out.println("Thêm thành công!");
+                    } else {
+                        System.out.println("Thêm thất bại!");
+                    }
+                    break;
                 case 0:
                     System.out.println("Bạn chọn chức năng thoát! Tạm biệt!");
                     System.exit(0); // thoát chương trình

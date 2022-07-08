@@ -68,4 +68,19 @@ public class SlangDictionary {
         });
         return slangWords;
     }
+
+    public int themSlangWord(String slang, String definition) throws IOException {
+        if (dictionary.isEmpty()) {
+            this.docFile();
+        }
+        try {
+            BufferedWriter buffer = new BufferedWriter(new FileWriter("slang.txt", true));
+            buffer.write("\r\n" + slang + "`" + definition);
+            dictionary.put(slang, definition);
+            buffer.close();
+        } catch (IOException ex) {
+            return -1;
+        }
+        return 1;
+    }
 }
