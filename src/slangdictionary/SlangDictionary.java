@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 /**
  *
@@ -39,13 +40,29 @@ public class SlangDictionary {
         }
     }
 
-    public HashMap<String, String> timSlangWord(String keyword) throws IOException {
+    public HashMap<String, String> timTheoSlangWord(String keyword) throws IOException {
         this.docFile();
         if (!dictionary.isEmpty()) {
             HashMap<String, String> slangWords = new HashMap<>();
             dictionary.keySet().forEach((String slang) -> {
                 if (slang.contains(keyword)) {
                     slangWords.put(slang, dictionary.get(slang));
+                }
+            });
+            return slangWords;
+        }
+        return null;
+    }
+
+    public HashMap<String, String> timTheoDefinition(String keyword) throws IOException {
+        this.docFile();
+        if (!dictionary.isEmpty()) {
+            HashMap<String, String> slangWords = new HashMap<>();
+            dictionary.entrySet().forEach(entry -> {
+                String slang = entry.getKey();
+                String definition = entry.getValue();
+                if (definition.contains(keyword)) {
+                    slangWords.put(slang, definition);
                 }
             });
             return slangWords;

@@ -19,25 +19,32 @@ public class Main {
         SlangDictionary dictionary = new SlangDictionary();
         Scanner scanner = new Scanner(System.in);
         int chon = -1;
+        String keyword;
+        HashMap<String, String> slangWords;
         do {
             System.out.println("============= MENU =============");
             System.out.println("|1. Tìm kiếm theo slang word.  |");
+            System.out.println("|2. Tìm kiếm theo definition.  |");
             System.out.println("|0. Thoát chương trình.        |");
             System.out.println("================================");
             System.out.print("Mời bạn chọn chức năng: ");
             chon = Integer.parseInt(scanner.nextLine());
             switch (chon) {
                 case 1:
-                    System.out.print("Mời bạn nhập slang word cần tìm: ");
-                    String keyword = scanner.nextLine();
-                    HashMap<String, String> slangWords = dictionary.timSlangWord(keyword);
-                    slangWords.keySet().forEach(slang -> {
-                        String meaning = slangWords.get(slang);
-                        System.out.println(slang + ": " + meaning);
-                    });
+                    System.out.print("Mời bạn nhập slang word: ");
+                    keyword = scanner.nextLine();
+                    slangWords = dictionary.timTheoSlangWord(keyword);
+                    for (String slang : slangWords.keySet()) {
+                        System.out.println(slang + " = " + slangWords.get(slang));
+                    }
                     break;
                 case 2:
-                    System.out.println("Bạn chọn chức năng xem!");
+                    System.out.print("Mời bạn nhập definition: ");
+                    keyword = scanner.nextLine();
+                    slangWords = dictionary.timTheoDefinition(keyword);
+                    for (String slang : slangWords.keySet()) {
+                        System.out.println(slang + " = " + slangWords.get(slang));
+                    }
                     break;
                 case 0:
                     System.out.println("Bạn chọn chức năng thoát! Tạm biệt!");
