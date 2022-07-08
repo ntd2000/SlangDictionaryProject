@@ -6,11 +6,12 @@
 package slangdictionary;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map.Entry;
 
 /**
  *
@@ -18,7 +19,7 @@ import java.util.Map.Entry;
  */
 public class SlangDictionary {
 
-    private HashMap<String, String> dictionary;
+    private HashMap<String, String> dictionary = new HashMap<>();
 
     public HashMap<String, String> getDictionary() {
         return dictionary;
@@ -41,32 +42,30 @@ public class SlangDictionary {
     }
 
     public HashMap<String, String> timTheoSlangWord(String keyword) throws IOException {
-        this.docFile();
-        if (!dictionary.isEmpty()) {
-            HashMap<String, String> slangWords = new HashMap<>();
-            dictionary.keySet().forEach((String slang) -> {
-                if (slang.contains(keyword)) {
-                    slangWords.put(slang, dictionary.get(slang));
-                }
-            });
-            return slangWords;
+        if (dictionary.isEmpty()) {
+            this.docFile();
         }
-        return null;
+        HashMap<String, String> slangWords = new HashMap<>();
+        dictionary.keySet().forEach((String slang) -> {
+            if (slang.equals(keyword)) {
+                slangWords.put(slang, dictionary.get(slang));
+            }
+        });
+        return slangWords;
     }
 
     public HashMap<String, String> timTheoDefinition(String keyword) throws IOException {
-        this.docFile();
-        if (!dictionary.isEmpty()) {
-            HashMap<String, String> slangWords = new HashMap<>();
-            dictionary.entrySet().forEach(entry -> {
-                String slang = entry.getKey();
-                String definition = entry.getValue();
-                if (definition.contains(keyword)) {
-                    slangWords.put(slang, definition);
-                }
-            });
-            return slangWords;
+        if (dictionary.isEmpty()) {
+            this.docFile();
         }
-        return null;
+        HashMap<String, String> slangWords = new HashMap<>();
+        dictionary.entrySet().forEach(entry -> {
+            String slang = entry.getKey();
+            String definition = entry.getValue();
+            if (definition.contains(keyword)) {
+                slangWords.put(slang, definition);
+            }
+        });
+        return slangWords;
     }
 }

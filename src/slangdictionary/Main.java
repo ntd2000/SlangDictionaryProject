@@ -21,10 +21,12 @@ public class Main {
         int chon = -1;
         String keyword;
         HashMap<String, String> slangWords;
+        HashMap<String, String> history = new HashMap<>();
         do {
             System.out.println("============= MENU =============");
             System.out.println("|1. Tìm kiếm theo slang word.  |");
             System.out.println("|2. Tìm kiếm theo definition.  |");
+            System.out.println("|3. Hiển thị history.          |");
             System.out.println("|0. Thoát chương trình.        |");
             System.out.println("================================");
             System.out.print("Mời bạn chọn chức năng: ");
@@ -35,6 +37,7 @@ public class Main {
                     keyword = scanner.nextLine();
                     slangWords = dictionary.timTheoSlangWord(keyword);
                     for (String slang : slangWords.keySet()) {
+                        history.put(slang, slangWords.get(slang));
                         System.out.println(slang + " = " + slangWords.get(slang));
                     }
                     break;
@@ -43,9 +46,16 @@ public class Main {
                     keyword = scanner.nextLine();
                     slangWords = dictionary.timTheoDefinition(keyword);
                     for (String slang : slangWords.keySet()) {
+                        history.put(slang, slangWords.get(slang));
                         System.out.println(slang + " = " + slangWords.get(slang));
                     }
                     break;
+                case 3:
+                    System.out.println("Hisory: ");
+                    for (String slang : history.keySet()) {
+                        System.out.println(slang + " = " + history.get(slang));
+                    }
+                    break;                
                 case 0:
                     System.out.println("Bạn chọn chức năng thoát! Tạm biệt!");
                     System.exit(0); // thoát chương trình
