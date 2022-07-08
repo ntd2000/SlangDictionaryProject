@@ -30,6 +30,7 @@ public class Main {
             System.out.println("|4. Them mot slang word moi.   |");
             System.out.println("|5. Chinh sua mọt slang word.  |");
             System.out.println("|6. Xoa mot slang word.        |");
+            System.out.println("|7. Reset slang words goc.     |");
             System.out.println("|0. Thoat chuong trinh.        |");
             System.out.println("================================");
             System.out.print("Moi ban chon chuc nang: ");
@@ -105,6 +106,12 @@ public class Main {
                             System.out.print("Ban chi co the chon 1 hoac 0? ");
                         }
                     } while (true);
+                    break;
+                case 7:
+                    if(dictionary.resetSlangWords() == 1){
+                        System.out.println("Reset thanh cong!");
+                    }else
+                        System.out.println("Reset that bai!");
                     break;
                 case 0:
                     System.out.println("Ban chon chuc nang thoat! Tam biet!");

@@ -108,8 +108,10 @@ public class SlangDictionary {
         try {
             BufferedWriter buffer = new BufferedWriter(new FileWriter("slang.txt"));
             for (String slang : dictionary.keySet()) {
-                if (slang.equals(deleteSlang))continue;
-                buffer.write(slang + "`" + dictionary.get(slang) + "\r\n" );
+                if (slang.equals(deleteSlang)) {
+                    continue;
+                }
+                buffer.write(slang + "`" + dictionary.get(slang) + "\r\n");
             }
             buffer.close();
             dictionary.remove(deleteSlang);
@@ -117,5 +119,23 @@ public class SlangDictionary {
             return -1;
         }
         return 1;
+    }
+
+    public int resetSlangWords() {
+        try {
+            BufferedReader readBF = new BufferedReader(new FileReader("slang_origin.txt"));
+            BufferedWriter writeBF = new BufferedWriter(new FileWriter("slang.txt"));
+            String line;
+            while ((line = readBF.readLine()) != null) {
+                line += "\r\n";
+                writeBF.append(line);
+            }
+            writeBF.flush();
+            writeBF.close();
+            readBF.close();
+            return 1;
+        } catch (IOException ex) {
+            return -1;
+        }
     }
 }
