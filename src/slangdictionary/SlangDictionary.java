@@ -80,7 +80,11 @@ public class SlangDictionary {
         try {
             BufferedWriter buffer = new BufferedWriter(new FileWriter("slang.txt", true));
             buffer.write("\r\n" + slang + "`" + definition);
-            dictionary.put(slang, definition);
+            if (dictionary.containsKey(slang)) {
+                return 2;
+            } else {
+                dictionary.put(slang, definition);
+            }
             buffer.close();
         } catch (IOException ex) {
             return -1;
@@ -93,12 +97,16 @@ public class SlangDictionary {
             this.docFile();
         }
         try {
-            BufferedWriter buffer = new BufferedWriter(new FileWriter("slang.txt"));
-            dictionary.replace(slang, definition);
-            for (String key : dictionary.keySet()) {
-                buffer.write(key + "`" + dictionary.get(key) + "\r\n");
+            if (dictionary.containsKey(slang)) {
+                BufferedWriter buffer = new BufferedWriter(new FileWriter("slang.txt"));
+                dictionary.replace(slang, definition);
+                for (String key : dictionary.keySet()) {
+                    buffer.write(key + "`" + dictionary.get(key) + "\r\n");
+                }
+                buffer.close();
+            } else {
+                return 2;
             }
-            buffer.close();
         } catch (IOException ex) {
             return -1;
         }
@@ -110,15 +118,17 @@ public class SlangDictionary {
             this.docFile();
         }
         try {
-            BufferedWriter buffer = new BufferedWriter(new FileWriter("slang.txt"));
-            for (String slang : dictionary.keySet()) {
-                if (slang.equals(deleteSlang)) {
-                    continue;
+            if (dictionary.containsKey(deleteSlang)) {
+                BufferedWriter buffer = new BufferedWriter(new FileWriter("slang.txt"));
+                for (String slang : dictionary.keySet()) {
+                    if (slang.equals(deleteSlang)) {
+                        continue;
+                    }
+                    buffer.write(slang + "`" + dictionary.get(slang) + "\r\n");
                 }
-                buffer.write(slang + "`" + dictionary.get(slang) + "\r\n");
-            }
-            buffer.close();
-            dictionary.remove(deleteSlang);
+                buffer.close();
+                dictionary.remove(deleteSlang);
+            }else return 2;
         } catch (IOException ex) {
             return -1;
         }
@@ -208,7 +218,7 @@ public class SlangDictionary {
                     check = false;
                     break;
                 default:
-                    System.out.println("Ban chi co the chon tu 1 - 4");
+                    System.out.println("Ban chi co the chon tu 1 - 4!");
                     break;
             };
         } while (check);
@@ -218,7 +228,7 @@ public class SlangDictionary {
             System.out.println("Rat tiec! Ban da chon sai!");
         }
     }
-    
+
     public void quizDefinition() throws IOException {
         Scanner scanner = new Scanner(System.in);
         if (dictionary.isEmpty()) {
@@ -226,8 +236,8 @@ public class SlangDictionary {
         }
         String randomDefi = randomDefinition();
         ArrayList<String> listSlang = new ArrayList<>();
-        for(String slang : dictionary.keySet()){
-            if(dictionary.get(slang).equals(randomDefi)){
+        for (String slang : dictionary.keySet()) {
+            if (dictionary.get(slang).equals(randomDefi)) {
                 listSlang.add(slang);
                 break;
             }
@@ -236,7 +246,7 @@ public class SlangDictionary {
             listSlang.add(randomSlangWord());
         }
         Collections.shuffle(listSlang);
-        System.out.println(randomDefi + " la cua slang word nao?(Co hoi chi co 1 lan)");
+        System.out.println(randomDefi + " la definition cua slang word nao?(Co hoi chi co 1 lan)");
         for (int i = 0; i < listSlang.size(); i++) {
             System.out.println((i + 1) + ". " + listSlang.get(i));
         }
@@ -263,11 +273,11 @@ public class SlangDictionary {
                     check = false;
                     break;
                 default:
-                    System.out.println("Ban chi co the chon tu 1 - 4");
+                    System.out.println("Ban chi co the chon tu 1 - 4!");
                     break;
             };
         } while (check);
-        
+
         if (randomDefi.equals(dictionary.get(dapAnChon))) {
             System.out.println("Chuc mung! Ban da chon dung!");
         } else {
